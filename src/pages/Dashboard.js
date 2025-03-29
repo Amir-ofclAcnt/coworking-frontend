@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [rooms, setRooms] = useState([]);
@@ -9,6 +10,8 @@ const Dashboard = () => {
     startTime: '',
     endTime: ''
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchRooms();
@@ -62,8 +65,14 @@ const Dashboard = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
   return (
     <div>
+      <button onClick={handleLogout}>Logga ut</button>
       <h2>Dashboard</h2>
 
       <form onSubmit={handleCreateBooking}>
