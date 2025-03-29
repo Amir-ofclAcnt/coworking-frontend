@@ -7,7 +7,7 @@ const RoomList = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/rooms', {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/rooms`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setRooms(res.data);
